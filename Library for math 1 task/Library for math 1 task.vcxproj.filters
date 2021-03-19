@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="math2.cpp">
+      <Filter>Mathi</Filter>
+    </ClCompile>
+    <ClCompile Include="math3.cpp">
+      <Filter>Mathi</Filter>
+    </ClCompile>
+    <ClCompile Include="math4.cpp">
+      <Filter>Mathi</Filter>
+    </ClCompile>
+    <ClCompile Include="vec2.cpp">
+      <Filter>Veci</Filter>
+    </ClCompile>
+    <ClCompile Include="vec3.cpp">
+      <Filter>Veci</Filter>
+    </ClCompile>
+    <ClCompile Include="vec4.cpp">
+      <Filter>Veci</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="math2.h">
+      <Filter>Mathi</Filter>
+    </ClInclude>
+    <ClInclude Include="math3.h">
+      <Filter>Mathi</Filter>
+    </ClInclude>
+    <ClInclude Include="math4.h">
+      <Filter>Mathi</Filter>
+    </ClInclude>
+    <ClInclude Include="vec2.h">
+      <Filter>Veci</Filter>
+    </ClInclude>
+    <ClInclude Include="vec3.h">
+      <Filter>Veci</Filter>
+    </ClInclude>
+    <ClInclude Include="vec4.h">
+      <Filter>Veci</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Veci">
+      <UniqueIdentifier>{4ae3209a-b9db-4fc9-a5d6-ba3a9b0113bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mathi">
+      <UniqueIdentifier>{58600635-e414-4774-8402-4dde50e541b2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
