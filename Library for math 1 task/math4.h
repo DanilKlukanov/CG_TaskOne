@@ -1,10 +1,11 @@
 #pragma once
 #include <cmath>
 #include "vec4.h"
+#include "vec3.h"
 class math4
 {
 public:
-	math4() = default;
+	math4();
 	math4(float);
 	math4(float, float, float, float,
 		  float, float, float, float,
@@ -30,9 +31,9 @@ public:
 	math4 IdentityMatrix();
 	math4 ReverseMatrix();
 	math4 TransposedMatrix();
-	math4 Translate(const math4&);
+	math4 Translate(const vec3&);
 	math4 Rotate(const math4&);
-	math4 Scale(const math4&);
+	math4 Scale(const vec3&);
 	vec4 GetRow(int);
 	vec4 GetColumn(int);
 	const bool operator==(const math4&);
