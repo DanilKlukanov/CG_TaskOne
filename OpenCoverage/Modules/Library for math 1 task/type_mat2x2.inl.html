@@ -1,0 +1,549 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>type_mat2x2.inl</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+#include "../matrix.hpp"
+
+namespace glm
+{
+	// -- Constructors --
+
+#	if GLM_CONFIG_DEFAULTED_DEFAULT_CTOR == GLM_DISABLE
+		template&lt;typename T, qualifier Q&gt;
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat()
+#			if GLM_CONFIG_CTOR_INIT == GLM_CTOR_INITIALIZER_LIST
+				: value{col_type(1, 0), col_type(0, 1)}
+#			endif
+		{
+#			if GLM_CONFIG_CTOR_INIT == GLM_CTOR_INITIALISATION
+				this-&gt;value[0] = col_type(1, 0);
+				this-&gt;value[1] = col_type(0, 1);
+#			endif
+		}
+#	endif
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;qualifier P&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;2, 2, T, P&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{m[0], m[1]}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = m[0];
+			this-&gt;value[1] = m[1];
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(T scalar)
+#		if GLM_HAS_INITIALIZER_LISTS
+<span style = "background-color:#dfd">			: value{col_type(scalar, 0), col_type(0, scalar)}</span>
+#		endif
+<span style = "background-color:#dfd">	{</span>
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(scalar, 0);
+			this-&gt;value[1] = col_type(0, scalar);
+#		endif
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat
+	(
+		T const&amp; x0, T const&amp; y0,
+		T const&amp; x1, T const&amp; y1
+	)
+#		if GLM_HAS_INITIALIZER_LISTS
+<span style = "background-color:#dfd">			: value{col_type(x0, y0), col_type(x1, y1)}</span>
+#		endif
+<span style = "background-color:#dfd">	{</span>
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(x0, y0);
+			this-&gt;value[1] = col_type(x1, y1);
+#		endif
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(col_type const&amp; v0, col_type const&amp; v1)
+#		if GLM_HAS_INITIALIZER_LISTS
+<span style = "background-color:#dfd">			: value{v0, v1}</span>
+#		endif
+<span style = "background-color:#dfd">	{</span>
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = v0;
+			this-&gt;value[1] = v1;
+#		endif
+<span style = "background-color:#dfd">	}</span>
+
+	// -- Conversion constructors --
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename X1, typename Y1, typename X2, typename Y2&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat
+	(
+		X1 const&amp; x1, Y1 const&amp; y1,
+		X2 const&amp; x2, Y2 const&amp; y2
+	)
+#		if GLM_HAS_INITIALIZER_LISTS
+<span style = "background-color:#dfd">			: value{col_type(static_cast&lt;T&gt;(x1), value_type(y1)), col_type(static_cast&lt;T&gt;(x2), value_type(y2)) }</span>
+#		endif
+<span style = "background-color:#dfd">	{</span>
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(static_cast&lt;T&gt;(x1), value_type(y1));
+			this-&gt;value[1] = col_type(static_cast&lt;T&gt;(x2), value_type(y2));
+#		endif
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename V1, typename V2&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(vec&lt;2, V1, Q&gt; const&amp; v1, vec&lt;2, V2, Q&gt; const&amp; v2)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(v1), col_type(v2)}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(v1);
+			this-&gt;value[1] = col_type(v2);
+#		endif
+	}
+
+	// -- mat2x2 matrix conversions --
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U, qualifier P&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;2, 2, U, P&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;3, 3, T, Q&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;4, 4, T, Q&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;2, 3, T, Q&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;3, 2, T, Q&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;2, 4, T, Q&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;4, 2, T, Q&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;3, 4, T, Q&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat&lt;2, 2, T, Q&gt;::mat(mat&lt;4, 3, T, Q&gt; const&amp; m)
+#		if GLM_HAS_INITIALIZER_LISTS
+			: value{col_type(m[0]), col_type(m[1])}
+#		endif
+	{
+#		if !GLM_HAS_INITIALIZER_LISTS
+			this-&gt;value[0] = col_type(m[0]);
+			this-&gt;value[1] = col_type(m[1]);
+#		endif
+	}
+
+	// -- Accesses --
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER typename mat&lt;2, 2, T, Q&gt;::col_type&amp; mat&lt;2, 2, T, Q&gt;::operator[](typename mat&lt;2, 2, T, Q&gt;::length_type i)
+<span style = "background-color:#dfd">	{
+		assert(i &lt; this-&gt;length());
+		return this-&gt;value[i];
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR typename mat&lt;2, 2, T, Q&gt;::col_type const&amp; mat&lt;2, 2, T, Q&gt;::operator[](typename mat&lt;2, 2, T, Q&gt;::length_type i) const
+<span style = "background-color:#dfd">	{
+		assert(i &lt; this-&gt;length());
+		return this-&gt;value[i];
+	}</span>
+
+	// -- Unary updatable operators --
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator=(mat&lt;2, 2, U, Q&gt; const&amp; m)
+	{
+		this-&gt;value[0] = m[0];
+		this-&gt;value[1] = m[1];
+		return *this;
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator+=(U scalar)
+<span style = "background-color:#dfd">	{
+		this-&gt;value[0] += scalar;
+		this-&gt;value[1] += scalar;
+		return *this;
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator+=(mat&lt;2, 2, U, Q&gt; const&amp; m)
+<span style = "background-color:#dfd">	{
+		this-&gt;value[0] += m[0];
+		this-&gt;value[1] += m[1];
+		return *this;
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator-=(U scalar)
+<span style = "background-color:#dfd">	{
+		this-&gt;value[0] -= scalar;
+		this-&gt;value[1] -= scalar;
+		return *this;
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator-=(mat&lt;2, 2, U, Q&gt; const&amp; m)
+<span style = "background-color:#dfd">	{
+		this-&gt;value[0] -= m[0];
+		this-&gt;value[1] -= m[1];
+		return *this;
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator*=(U scalar)
+<span style = "background-color:#dfd">	{
+		this-&gt;value[0] *= scalar;
+		this-&gt;value[1] *= scalar;
+		return *this;
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator*=(mat&lt;2, 2, U, Q&gt; const&amp; m)
+<span style = "background-color:#dfd">	{
+		return (*this = *this * m);
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator/=(U scalar)
+<span style = "background-color:#dfd">	{
+		this-&gt;value[0] /= scalar;
+		this-&gt;value[1] /= scalar;
+		return *this;
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	template&lt;typename U&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator/=(mat&lt;2, 2, U, Q&gt; const&amp; m)
+	{
+		return *this *= inverse(m);
+	}
+
+	// -- Increment and decrement operators --
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator++()
+	{
+		++this-&gt;value[0];
+		++this-&gt;value[1];
+		return *this;
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt;&amp; mat&lt;2, 2, T, Q&gt;::operator--()
+	{
+		--this-&gt;value[0];
+		--this-&gt;value[1];
+		return *this;
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; mat&lt;2, 2, T, Q&gt;::operator++(int)
+	{
+		mat&lt;2, 2, T, Q&gt; Result(*this);
+		++*this;
+		return Result;
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; mat&lt;2, 2, T, Q&gt;::operator--(int)
+	{
+		mat&lt;2, 2, T, Q&gt; Result(*this);
+		--*this;
+		return Result;
+	}
+
+	// -- Unary arithmetic operators --
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator+(mat&lt;2, 2, T, Q&gt; const&amp; m)
+	{
+		return m;
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator-(mat&lt;2, 2, T, Q&gt; const&amp; m)
+	{
+		return mat&lt;2, 2, T, Q&gt;(
+			-m[0],
+			-m[1]);
+	}
+
+	// -- Binary arithmetic operators --
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator+(mat&lt;2, 2, T, Q&gt; const&amp; m, T scalar)
+<span style = "background-color:#dfd">	{
+		return mat&lt;2, 2, T, Q&gt;(</span>
+			m[0] + scalar,
+			m[1] + scalar);
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator+(T scalar, mat&lt;2, 2, T, Q&gt; const&amp; m)
+	{
+		return mat&lt;2, 2, T, Q&gt;(
+			m[0] + scalar,
+			m[1] + scalar);
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator+(mat&lt;2, 2, T, Q&gt; const&amp; m1, mat&lt;2, 2, T, Q&gt; const&amp; m2)
+<span style = "background-color:#dfd">	{
+		return mat&lt;2, 2, T, Q&gt;(</span>
+			m1[0] + m2[0],
+			m1[1] + m2[1]);
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator-(mat&lt;2, 2, T, Q&gt; const&amp; m, T scalar)
+<span style = "background-color:#dfd">	{
+		return mat&lt;2, 2, T, Q&gt;(</span>
+			m[0] - scalar,
+			m[1] - scalar);
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator-(T scalar, mat&lt;2, 2, T, Q&gt; const&amp; m)
+	{
+		return mat&lt;2, 2, T, Q&gt;(
+			scalar - m[0],
+			scalar - m[1]);
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator-(mat&lt;2, 2, T, Q&gt; const&amp; m1, mat&lt;2, 2, T, Q&gt; const&amp; m2)
+<span style = "background-color:#dfd">	{
+		return mat&lt;2, 2, T, Q&gt;(</span>
+			m1[0] - m2[0],
+			m1[1] - m2[1]);
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator*(mat&lt;2, 2, T, Q&gt; const&amp; m, T scalar)
+<span style = "background-color:#dfd">	{
+		return mat&lt;2, 2, T, Q&gt;(</span>
+			m[0] * scalar,
+			m[1] * scalar);
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator*(T scalar, mat&lt;2, 2, T, Q&gt; const&amp; m)
+	{
+		return mat&lt;2, 2, T, Q&gt;(
+			m[0] * scalar,
+			m[1] * scalar);
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER typename mat&lt;2, 2, T, Q&gt;::col_type operator*
+	(
+		mat&lt;2, 2, T, Q&gt; const&amp; m,
+		typename mat&lt;2, 2, T, Q&gt;::row_type const&amp; v
+	)
+<span style = "background-color:#dfd">	{
+		return vec&lt;2, T, Q&gt;(</span>
+			m[0][0] * v.x + m[1][0] * v.y,
+			m[0][1] * v.x + m[1][1] * v.y);
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER typename mat&lt;2, 2, T, Q&gt;::row_type operator*
+	(
+		typename mat&lt;2, 2, T, Q&gt;::col_type const&amp; v,
+		mat&lt;2, 2, T, Q&gt; const&amp; m
+	)
+	{
+		return vec&lt;2, T, Q&gt;(
+			v.x * m[0][0] + v.y * m[0][1],
+			v.x * m[1][0] + v.y * m[1][1]);
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator*(mat&lt;2, 2, T, Q&gt; const&amp; m1, mat&lt;2, 2, T, Q&gt; const&amp; m2)
+<span style = "background-color:#dfd">	{
+		return mat&lt;2, 2, T, Q&gt;(</span>
+			m1[0][0] * m2[0][0] + m1[1][0] * m2[0][1],
+			m1[0][1] * m2[0][0] + m1[1][1] * m2[0][1],
+			m1[0][0] * m2[1][0] + m1[1][0] * m2[1][1],
+			m1[0][1] * m2[1][0] + m1[1][1] * m2[1][1]);
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;3, 2, T, Q&gt; operator*(mat&lt;2, 2, T, Q&gt; const&amp; m1, mat&lt;3, 2, T, Q&gt; const&amp; m2)
+	{
+		return mat&lt;3, 2, T, Q&gt;(
+			m1[0][0] * m2[0][0] + m1[1][0] * m2[0][1],
+			m1[0][1] * m2[0][0] + m1[1][1] * m2[0][1],
+			m1[0][0] * m2[1][0] + m1[1][0] * m2[1][1],
+			m1[0][1] * m2[1][0] + m1[1][1] * m2[1][1],
+			m1[0][0] * m2[2][0] + m1[1][0] * m2[2][1],
+			m1[0][1] * m2[2][0] + m1[1][1] * m2[2][1]);
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;4, 2, T, Q&gt; operator*(mat&lt;2, 2, T, Q&gt; const&amp; m1, mat&lt;4, 2, T, Q&gt; const&amp; m2)
+	{
+		return mat&lt;4, 2, T, Q&gt;(
+			m1[0][0] * m2[0][0] + m1[1][0] * m2[0][1],
+			m1[0][1] * m2[0][0] + m1[1][1] * m2[0][1],
+			m1[0][0] * m2[1][0] + m1[1][0] * m2[1][1],
+			m1[0][1] * m2[1][0] + m1[1][1] * m2[1][1],
+			m1[0][0] * m2[2][0] + m1[1][0] * m2[2][1],
+			m1[0][1] * m2[2][0] + m1[1][1] * m2[2][1],
+			m1[0][0] * m2[3][0] + m1[1][0] * m2[3][1],
+			m1[0][1] * m2[3][0] + m1[1][1] * m2[3][1]);
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator/(mat&lt;2, 2, T, Q&gt; const&amp; m, T scalar)
+<span style = "background-color:#dfd">	{
+		return mat&lt;2, 2, T, Q&gt;(</span>
+			m[0] / scalar,
+			m[1] / scalar);
+<span style = "background-color:#dfd">	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator/(T scalar, mat&lt;2, 2, T, Q&gt; const&amp; m)
+	{
+		return mat&lt;2, 2, T, Q&gt;(
+			scalar / m[0],
+			scalar / m[1]);
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER typename mat&lt;2, 2, T, Q&gt;::col_type operator/(mat&lt;2, 2, T, Q&gt; const&amp; m, typename mat&lt;2, 2, T, Q&gt;::row_type const&amp; v)
+	{
+		return inverse(m) * v;
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER typename mat&lt;2, 2, T, Q&gt;::row_type operator/(typename mat&lt;2, 2, T, Q&gt;::col_type const&amp; v, mat&lt;2, 2, T, Q&gt; const&amp; m)
+	{
+		return v *  inverse(m);
+	}
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER mat&lt;2, 2, T, Q&gt; operator/(mat&lt;2, 2, T, Q&gt; const&amp; m1, mat&lt;2, 2, T, Q&gt; const&amp; m2)
+	{
+		mat&lt;2, 2, T, Q&gt; m1_copy(m1);
+		return m1_copy /= m2;
+	}
+
+	// -- Boolean operators --
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER bool operator==(mat&lt;2, 2, T, Q&gt; const&amp; m1, mat&lt;2, 2, T, Q&gt; const&amp; m2)
+<span style = "background-color:#dfd">	{
+		return (m1[0] == m2[0]) &amp;&amp; (m1[1] == m2[1]);
+	}</span>
+
+	template&lt;typename T, qualifier Q&gt;
+	GLM_FUNC_QUALIFIER bool operator!=(mat&lt;2, 2, T, Q&gt; const&amp; m1, mat&lt;2, 2, T, Q&gt; const&amp; m2)
+<span style = "background-color:#dfd">	{
+		return (m1[0] != m2[0]) || (m1[1] != m2[1]);
+	}</span>
+} //namespace glm</pre>
+	</body>
+</html>

@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>math3.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+#include "pch.h"
+#include "math3.h"
+
+<span style = "background-color:#dfd">math3::math3() = default;</span>
+
+<span style = "background-color:#dfd">math3::math3(float number) {
+	matrix[0][0] = number;
+	matrix[0][1] = 0;
+	matrix[0][2] = 0;
+	matrix[1][0] = 0;
+	matrix[1][1] = number;
+	matrix[1][2] = 0;
+	matrix[2][0] = 0;
+	matrix[2][1] = 0;
+	matrix[2][2] = number;
+}</span>
+
+math3::math3(float a, float b, float c,
+			 float d, float e, float f,
+			 float g, float h, float i) 
+<span style = "background-color:#dfd">{
+	matrix[0][0] = a;
+	matrix[0][1] = d;
+	matrix[0][2] = g;
+	matrix[1][0] = b;
+	matrix[1][1] = e;
+	matrix[1][2] = h;
+	matrix[2][0] = c;
+	matrix[2][1] = f;
+	matrix[2][2] = i;
+}</span>
+
+<span style = "background-color:#dfd">math3::math3(const vec3&amp; first, const vec3&amp; second, const vec3&amp; third) {
+	matrix[0][0] = first.x;
+	matrix[0][1] = second.x;
+	matrix[0][2] = third.x;
+	matrix[1][0] = first.y;
+	matrix[1][1] = second.y;
+	matrix[1][2] = third.y;
+	matrix[2][0] = first.z;
+	matrix[2][1] = second.z;
+	matrix[2][2] = third.z;
+}</span>
+
+<span style = "background-color:#dfd">math3::math3(const math3&amp; other) {
+	matrix = other.matrix;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::operator+(const math3&amp; other) const {
+	math3 res;
+	for (int i = 0; i &lt; 3; i++) {
+		for (int j = 0; j &lt; 3; j++) {
+			res.matrix[i][j] = matrix[j][i] + other.matrix[j][i];
+		}
+	}
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3&amp; math3::operator+=(const math3&amp; other) {
+	*this = *this + other;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::operator-(const math3&amp; other) const {
+	math3 res;
+	for (int i = 0; i &lt; 3; i++) {
+		for (int j = 0; j &lt; 3; j++) {
+			res.matrix[i][j] = matrix[j][i] - other.matrix[j][i];
+		}
+	}
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3&amp; math3::operator-=(const math3&amp; other) {
+	*this = *this - other;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::operator*(const math3&amp; other) const {
+	math3 res;
+	for (int i = 0; i &lt; 3; i++) {
+		for (int j = 0; j &lt; 3; j++) {
+			res.matrix[j][i] = 0;
+			for (int k = 0; k &lt; 3; k++) {
+				res.matrix[j][i] += matrix[i][k] * other.matrix[k][j];
+			}
+		}
+	}
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3&amp; math3::operator*=(const math3&amp; other) {
+	*this = *this * other;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::operator*(float number) const {
+	math3 res;
+	for (int i = 0; i &lt; 3; i++) {
+		for (int j = 0; j &lt; 3; j++) {
+			res.matrix[i][j] = matrix[j][i] * number;
+		}
+	}
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3&amp; math3::operator*=(float number) {
+	*this = *this * number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::operator/(float number) const {
+	math3 res;
+	for (int i = 0; i &lt; 3; i++) {
+		for (int j = 0; j &lt; 3; j++) {
+			res.matrix[i][j] = matrix[j][i] / number;
+		}
+	}
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3&amp; math3::operator/=(float number) {
+	*this = *this / number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::operator+(float number) const {
+	math3 res;
+	for (int i = 0; i &lt; 3; i++) {
+		for (int j = 0; j &lt; 3; j++) {
+			res.matrix[i][j] = matrix[j][i] + number;
+		}
+	}
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3&amp; math3::operator+=(float number) {
+	*this = *this + number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::operator-(float number) const {
+	math3 res;
+	for (int i = 0; i &lt; 3; i++) {
+		for (int j = 0; j &lt; 3; j++) {
+			res.matrix[i][j] = matrix[j][i] - number;
+		}
+	}
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3&amp; math3::operator-=(float number) {
+	*this = *this - number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">vec3 math3::operator*(const vec3&amp; vec) const {
+	vec3 res;
+	res.x = matrix[0][0] * vec.x + matrix[0][1] * vec.y + matrix[0][2] * vec.z;
+	res.y = matrix[1][0] * vec.x + matrix[1][1] * vec.y + matrix[1][2] * vec.z;
+	res.z = matrix[2][0] * vec.x + matrix[2][1] * vec.y + matrix[2][2] * vec.z;
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::IdentityMatrix() {
+	return math3(1.0f);
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::ReverseMatrix() {
+	float det = matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[2][1] * matrix[1][2])</span>
+		- matrix[1][0] * (matrix[0][1] * matrix[2][2] - matrix[2][1] * matrix[0][2])
+		+ matrix[2][0] * (matrix[0][1] * matrix[1][2] - matrix[1][1] * matrix[0][2]);
+
+<span style = "background-color:#dfd">	math3 res;
+	res.matrix[0][0] = (matrix[1][1] * matrix[2][2] - matrix[2][1] * matrix[1][2]) * (1 / det);
+	res.matrix[1][0] = -(matrix[1][0] * matrix[2][2] - matrix[2][0] * matrix[1][2]) * (1 / det);
+	res.matrix[2][0] = (matrix[1][0] * matrix[2][1] - matrix[2][0] * matrix[1][1]) * (1 / det);
+	res.matrix[0][1] = -(matrix[0][1] * matrix[2][2] - matrix[2][1] * matrix[0][2]) * (1 / det);
+	res.matrix[1][1] = (matrix[0][0] * matrix[2][2] - matrix[2][0] * matrix[0][2]) * (1 / det);
+	res.matrix[2][1] = -(matrix[0][0] * matrix[2][1] - matrix[2][0] * matrix[0][1]) * (1 / det);
+	res.matrix[0][2] = (matrix[0][1] * matrix[1][2] - matrix[1][1] * matrix[0][2]) * (1 / det);
+	res.matrix[1][2] = -(matrix[0][0] * matrix[1][2] - matrix[1][0] * matrix[0][2]) * (1 / det);
+	res.matrix[2][2] = (matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1]) * (1 / det);</span>
+
+<span style = "background-color:#dfd">	return res;
+}</span>
+
+<span style = "background-color:#dfd">math3 math3::TransposedMatrix() {
+	return math3(GetColumn(0), GetColumn(1), GetColumn(2));
+}</span>
+
+<span style = "background-color:#dfd">vec3 math3::GetRow(int ind) {
+	if (ind &gt;= 0 &amp;&amp; ind &lt; 3) {
+		return vec3(matrix[ind][0], matrix[ind][1], matrix[ind][2]);</span>
+	}
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">vec3 math3::GetColumn(int ind) {
+	if (ind &gt;= 0 &amp;&amp; ind &lt; 3) {
+		std::vector&lt;float&gt; res(3);
+		for (int i = 0; i &lt; 3; i++) {
+			res[i] = matrix[i][ind];
+		}
+		return vec3(res[0], res[1], res[2]);</span>
+	}
+<span style = "background-color:#dfd">}
+const bool math3::operator==(const math3&amp; other) {
+	return (matrix == other.matrix);
+}</span>
+
+<span style = "background-color:#dfd">const bool math3::operator!=(const math3&amp; other) {
+	return !(matrix == other.matrix);
+}</span></pre>
+	</body>
+</html>

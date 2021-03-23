@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>vec4.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+#include "pch.h"
+#include "vec4.h"
+
+<span style = "background-color:#dfd">vec4::vec4(float number) : x(number), y(number), z(number), w(number) {}</span>
+
+<span style = "background-color:#dfd">vec4::vec4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}</span>
+
+<span style = "background-color:#dfd">vec4::vec4(const vec4&amp; other) : x(other.x), y(other.y), z(other.z), w(other.w) {}</span>
+
+<span style = "background-color:#dfd">vec4 vec4::operator+(const vec4&amp; other) const {
+	return vec4(x + other.x, y + other.y, z + other.z, w + other.w);
+}</span>
+
+<span style = "background-color:#dfd">vec4&amp; vec4::operator+=(const vec4&amp; other) {
+	*this = *this + other;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">vec4 vec4::operator-(const vec4&amp; other) const {
+	return vec4(x - other.x, y - other.y, z - other.z, w - other.w);
+}</span>
+
+<span style = "background-color:#dfd">vec4&amp; vec4::operator-=(const vec4&amp; other) {
+	*this = *this - other;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">float vec4::ScalarMultiplication(const vec4&amp; other) {
+	return (x * other.x) + (y * other.y) + (z * other.z) + (w * other.w);
+}</span>
+
+
+<span style = "background-color:#dfd">vec4 vec4::operator*(float number) const {
+	return vec4(x * number, y * number, z * number, w * number);
+}</span>
+
+<span style = "background-color:#dfd">vec4&amp; vec4::operator*=(float number) {
+	x = x * number;
+	y = y * number;
+	z = z * number;
+	w = w * number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">vec4 vec4::operator/(float number) const {
+	if (number != 0) {
+		return vec4(x / number, y / number, z / number, w / number);</span>
+	}
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">vec4&amp; vec4::operator/=(float number) {
+	if (number != 0) {
+		x = x / number;
+		y = y / number;
+		z = z / number;
+		w = w / number;
+		return *this;</span>
+	}
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">float vec4::Lenght() {
+	return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2) + pow(w, 2));
+}</span>
+
+<span style = "background-color:#dfd">vec4 vec4::Normalize() {
+	if (Lenght() != 0) {
+		return vec4(x / Lenght(), y / Lenght(), z / Lenght(), w / Lenght());</span>
+	}
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">const bool vec4::operator==(const vec4&amp; other) {
+	return (x == other.x &amp;&amp; y == other.y, z == other.z &amp;&amp; w == other.w);
+}</span>
+
+<span style = "background-color:#dfd">const bool vec4::operator!=(const vec4&amp; other) {
+	return !(x == other.x &amp;&amp; y == other.y &amp;&amp; z == other.z &amp;&amp; w == other.w);
+}</span></pre>
+	</body>
+</html>

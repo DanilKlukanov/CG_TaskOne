@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>matrix_access.inl</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+/// @ref gtc_matrix_access
+
+namespace glm
+{
+	template&lt;typename genType&gt;
+	GLM_FUNC_QUALIFIER genType row
+	(
+		genType const&amp; m,
+		length_t index,
+		typename genType::row_type const&amp; x
+	)
+	{
+		assert(index &gt;= 0 &amp;&amp; index &lt; m[0].length());
+
+		genType Result = m;
+		for(length_t i = 0; i &lt; m.length(); ++i)
+			Result[i][index] = x[i];
+		return Result;
+	}
+
+	template&lt;typename genType&gt;
+	GLM_FUNC_QUALIFIER typename genType::row_type row
+	(
+		genType const&amp; m,
+		length_t index
+	)
+<span style = "background-color:#dfd">	{
+		assert(index &gt;= 0 &amp;&amp; index &lt; m[0].length());</span>
+
+<span style = "background-color:#dfd">		typename genType::row_type Result(0);
+		for(length_t i = 0; i &lt; m.length(); ++i)
+			Result[i] = m[i][index];
+		return Result;
+	}</span>
+
+	template&lt;typename genType&gt;
+	GLM_FUNC_QUALIFIER genType column
+	(
+		genType const&amp; m,
+		length_t index,
+		typename genType::col_type const&amp; x
+	)
+	{
+		assert(index &gt;= 0 &amp;&amp; index &lt; m.length());
+
+		genType Result = m;
+		Result[index] = x;
+		return Result;
+	}
+
+	template&lt;typename genType&gt;
+	GLM_FUNC_QUALIFIER typename genType::col_type column
+	(
+		genType const&amp; m,
+		length_t index
+	)
+<span style = "background-color:#dfd">	{
+		assert(index &gt;= 0 &amp;&amp; index &lt; m.length());</span>
+
+<span style = "background-color:#dfd">		return m[index];
+	}</span>
+}//namespace glm</pre>
+	</body>
+</html>

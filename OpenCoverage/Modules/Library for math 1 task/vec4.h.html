@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>vec4.h</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+#pragma once
+#include &lt;cmath&gt;
+
+class vec4
+{
+public:
+	vec4() = default;
+	vec4(float);
+	vec4(float, float, float, float);
+	vec4(const vec4&amp;);
+	vec4 operator+(const vec4&amp;) const;
+	vec4&amp; operator+=(const vec4&amp;);
+	vec4 operator-(const vec4&amp;) const;
+	vec4&amp; operator-=(const vec4&amp;);
+	float ScalarMultiplication(const vec4&amp;);
+	vec4 operator*(float) const;
+	vec4&amp; operator*=(float);
+	vec4 operator/(float) const;
+	vec4&amp; operator/=(float);
+	float Lenght();
+	vec4 Normalize();
+	const bool operator==(const vec4&amp;);
+	const bool operator!=(const vec4&amp;);
+<span style = "background-color:#dfd">	float x = 0, y = 0, z = 0, w = 0;</span>
+};
+</pre>
+	</body>
+</html>

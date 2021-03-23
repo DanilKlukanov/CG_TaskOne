@@ -17,6 +17,16 @@
 #include "glm/gtc/matrix_access.hpp"
 #include <iostream>
 
+TEST(Vec2, Constructor) {
+	glm::vec2 result(3);
+
+	vec2 res(3);
+
+	EXPECT_EQ(result.x, res.x);
+	EXPECT_EQ(result.y, res.y);
+	EXPECT_EQ(result.x, 3);
+	EXPECT_EQ(result.y, 3);
+}
 TEST(Vec2, Add) {
 	glm::vec2 vectorOne = glm::vec2(4, 5);
 	glm::vec2 vectorTwo = glm::vec2(17, 8);
@@ -394,6 +404,16 @@ TEST(Vec3, NOIqual) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+TEST(Vec4, Constructor) {
+	glm::vec4 result(4);
+
+	vec4 res(4);
+
+	EXPECT_EQ(result.x, res.x);
+	EXPECT_EQ(result.y, res.y);
+	EXPECT_EQ(result.z, res.z);
+	EXPECT_EQ(result.w, res.w);
+}
 TEST(Vec4, Add) {
 	glm::vec4 vectorOne = glm::vec4(4, 5, 3, 0);
 	glm::vec4 vectorTwo = glm::vec4(17, 8, 6, 100);
@@ -601,14 +621,26 @@ TEST(Vec4, NOIqual) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+TEST(Math2, Constructor) {
+	glm::mat2 result(2);
+
+	math2 res(2);
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+}
 TEST(Math2, Add) {
 	glm::mat2 vectorOne = glm::mat2(1, 2, 3, 4);
 	glm::mat2 vectorTwo = glm::mat2(5, 6, 7, 8);
+
 	glm::mat2 result = vectorOne + vectorTwo;
 
 	math2 matOne(1, 2, 3, 4);
 	math2 matTwo(5, 6, 7, 8);
-	math2 res(matOne + matTwo);
+	math2 res;
+	res = matOne + matTwo;
 
 	EXPECT_EQ(result[0][0], res.matrix[0][0]);
 	EXPECT_EQ(result[0][1], res.matrix[0][1]);
@@ -638,7 +670,8 @@ TEST(Math2, Sub) {
 
 	math2 matOne(1, 2, 3, 4);
 	math2 matTwo(5, 6, 7, 8);
-	math2 res(matOne - matTwo);
+	math2 fuc = matOne - matTwo;
+	math2 res = fuc;
 
 	EXPECT_EQ(result[0][0], res.matrix[0][0]);
 	EXPECT_EQ(result[0][1], res.matrix[0][1]);
@@ -717,6 +750,16 @@ TEST(Math2, MulNum1) {
 	EXPECT_EQ(vectorOne[1][1], matOne.matrix[1][1]);
 }
 
+TEST(Math2, IdentityMatrix) {
+	glm::mat2 result = glm::mat2(1);
+	math2 fuc;
+	math2 res = fuc.IdentityMatrix();
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+}
 TEST(Math2, DivNum) {
 	glm::mat2 vectorOne = glm::mat2(1, 2, 3, 4);
 	glm::mat2 result = vectorOne / 15.0f;
@@ -882,6 +925,23 @@ TEST(Math2, NOIqual) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+TEST(Math3, Constructor) {
+	glm::mat3 result = glm::mat3(9);
+
+	math3 res(9);
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[0][2], res.matrix[0][2]);
+
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+	EXPECT_EQ(result[1][2], res.matrix[1][2]);
+
+	EXPECT_EQ(result[2][0], res.matrix[2][0]);
+	EXPECT_EQ(result[2][1], res.matrix[2][1]);
+	EXPECT_EQ(result[2][2], res.matrix[2][2]);
+}
 TEST(Math3, Add) {
 	glm::mat3 MathOne = glm::mat3(1, 2, 3, 4, 5, 6, 7, 8, 9);
 	glm::mat3 MAthTwo = glm::mat3(1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -926,6 +986,23 @@ TEST(Math3, Add1) {
 	EXPECT_EQ(MathOne[2][2], matOne.matrix[2][2]);
 }
 
+TEST(Math3, IdentityMatrix) {
+	glm::mat3 result = glm::mat3(1);
+	math3 fuc;
+	math3 res = fuc.IdentityMatrix();
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[0][2], res.matrix[0][2]);
+
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+	EXPECT_EQ(result[1][2], res.matrix[1][2]);
+
+	EXPECT_EQ(result[2][0], res.matrix[2][0]);
+	EXPECT_EQ(result[2][1], res.matrix[2][1]);
+	EXPECT_EQ(result[2][2], res.matrix[2][2]);
+}
 TEST(Math3, Sub) {
 	glm::mat3 MathOne = glm::mat3(1, 2, 3, 4, 5, 6, 7, 8, 9);
 	glm::mat3 MAthTwo = glm::mat3(9, 8, 7, 6, 5, 4, 3, 2, 1);
@@ -1338,6 +1415,31 @@ TEST(Math4, Add1) {
 	EXPECT_EQ(MathOne[3][3], matOne.matrix[3][3]);
 }
 
+TEST(Math4, IdentityMatrix) {
+	glm::mat4 result = glm::mat4(1);
+	math4 fuc;
+	math4 res = fuc.IdentityMatrix();
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[0][2], res.matrix[0][2]);
+	EXPECT_EQ(result[0][3], res.matrix[0][3]);
+
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+	EXPECT_EQ(result[1][2], res.matrix[1][2]);
+	EXPECT_EQ(result[1][3], res.matrix[1][3]);
+
+	EXPECT_EQ(result[2][0], res.matrix[2][0]);
+	EXPECT_EQ(result[2][1], res.matrix[2][1]);
+	EXPECT_EQ(result[2][2], res.matrix[2][2]);
+	EXPECT_EQ(result[2][3], res.matrix[2][3]);
+
+	EXPECT_EQ(result[3][0], res.matrix[3][0]);
+	EXPECT_EQ(result[3][1], res.matrix[3][1]);
+	EXPECT_EQ(result[3][2], res.matrix[3][2]);
+	EXPECT_EQ(result[3][3], res.matrix[3][3]);
+}
 TEST(Math4, Sub) {
 	glm::mat4 MathOne = glm::mat4(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 	glm::mat4 MAthTwo = glm::mat4(16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1);

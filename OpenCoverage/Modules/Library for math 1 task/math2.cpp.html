@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>math2.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+#include "pch.h"
+#include "math2.h"
+
+<span style = "background-color:#dfd">math2::math2() = default;</span>
+
+<span style = "background-color:#dfd">math2::math2(float number) {
+	matrix[0][0] = number;
+	matrix[0][1] = 0;
+	matrix[1][0] = 0;
+	matrix[1][1] = number;
+}</span>
+
+<span style = "background-color:#dfd">math2::math2(float a, float b, float c, float d) {
+	matrix[0][0] = a;
+	matrix[0][1] = c;
+	matrix[1][0] = b;
+	matrix[1][1] = d;
+}</span>
+
+<span style = "background-color:#dfd">math2::math2(const vec2&amp; first, const vec2&amp; second) {
+	matrix[0][0] = first.x;
+	matrix[0][1] = second.x;
+	matrix[1][0] = first.y;
+	matrix[1][1] = second.y;
+}</span>
+
+<span style = "background-color:#dfd">math2::math2(const math2&amp; other) {
+	matrix = other.matrix;
+}</span>
+
+<span style = "background-color:#dfd">math2 math2::operator+(const math2&amp; other) const {
+	return math2(matrix[0][0] + other.matrix[0][0],</span>
+		matrix[0][1] + other.matrix[0][1],
+		matrix[1][0] + other.matrix[1][0],
+		matrix[1][1] + other.matrix[1][1]);
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">math2&amp; math2::operator+=(const math2&amp; other) {
+	*this = *this + other;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math2 math2::operator-(const math2&amp; other) const {
+	return math2(matrix[0][0] - other.matrix[0][0],</span>
+		matrix[0][1] - other.matrix[0][1],
+		matrix[1][0] - other.matrix[1][0],
+		matrix[1][1] - other.matrix[1][1]);
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">math2&amp; math2::operator-=(const math2&amp; other) {
+	*this = *this - other;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math2 math2::operator*(const math2&amp; other) const {
+	return math2(matrix[0][0] * other.matrix[0][0] + matrix[0][1] * other.matrix[1][0],</span>
+		matrix[0][0] * other.matrix[0][1] + matrix[0][1] * other.matrix[1][1],
+		matrix[1][0] * other.matrix[0][0] + matrix[1][1] * other.matrix[1][0],
+		matrix[1][0] * other.matrix[0][1] + matrix[1][1] * other.matrix[1][1]);
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">math2&amp; math2::operator*=(const math2&amp; other) {
+	*this = *this * other;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math2 math2::operator*(float number) const {
+	return math2(matrix[0][0] * number,</span>
+		matrix[0][1] * number,
+		matrix[1][0] * number,
+		matrix[1][1] * number);
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">math2&amp; math2::operator*=(float number) {
+	*this = *this * number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math2 math2::operator/(float number) const {
+	if ((matrix[0][0] != 0) &amp;&amp; (matrix[0][1] != 0) &amp;&amp; (matrix[1][0] != 0) &amp;&amp; (matrix[1][1] != 0)) {
+		return math2(matrix[0][0] / number,</span>
+			matrix[0][1] / number,
+			matrix[1][0] / number,
+			matrix[1][1] / number);
+	}
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">math2&amp; math2::operator/=(float number) {
+	*this = *this / number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math2 math2::operator+(float number) const {
+	return math2(matrix[0][0] + number,</span>
+		matrix[0][1] + number,
+		matrix[1][0] + number,
+		matrix[1][1] + number);
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">math2&amp; math2::operator+=(float number) {
+	*this = *this + number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">math2 math2::operator-(float number) const {
+	return math2(matrix[0][0] - number,</span>
+		matrix[0][1] - number,
+		matrix[1][0] - number,
+		matrix[1][1] - number);
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">math2&amp; math2::operator-=(float number) {
+	*this = *this - number;
+	return *this;
+}</span>
+
+<span style = "background-color:#dfd">vec2 math2::operator*(const vec2&amp; other) const {
+	vec2 res;
+	res.x = matrix[0][0] * other.x + matrix[0][1] * other.y;
+	res.y = matrix[1][0] * other.x + matrix[1][1] * other.y;
+	return res;
+}</span>
+
+<span style = "background-color:#dfd">math2 math2::IdentityMatrix() {
+	return math2(1.0f);
+}</span>
+
+
+<span style = "background-color:#dfd">math2 math2::ReverseMatrix() {
+	float DivDet = 1 / (+matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1]);
+	return math2(+matrix[1][1] * DivDet, </span>
+		-matrix[0][1] * DivDet,
+		-matrix[1][0] * DivDet,
+		+matrix[0][0] * DivDet);
+<span style = "background-color:#dfd">}</span>
+
+
+<span style = "background-color:#dfd">math2 math2::TransposedMatrix() {
+	return math2(GetColumn(0), GetColumn(1));
+}</span>
+
+<span style = "background-color:#dfd">vec2 math2::GetRow(int ind) {
+	if (ind &gt;= 0 &amp;&amp; ind &lt; 2) {
+		return vec2(matrix[ind][0], matrix[ind][1]);</span>
+	}
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">vec2 math2::GetColumn(int ind) {
+	if (ind &gt;= 0 &amp;&amp; ind &lt; 2) {
+		std::vector&lt;float&gt; res(2);
+		for (int i = 0; i &lt; 2; i++) {
+			res[i] = matrix[i][ind];
+		}
+		return vec2(res[0], res[1]);</span>
+	}
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">const bool math2::operator==(const math2&amp; other) {
+	return (matrix == other.matrix);
+}</span>
+
+<span style = "background-color:#dfd">const bool math2::operator!=(const math2&amp; other) {
+	return !(matrix == other.matrix);
+}</span></pre>
+	</body>
+</html>

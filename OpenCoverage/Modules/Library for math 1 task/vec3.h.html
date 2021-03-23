@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>vec3.h</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+#pragma once
+#include &lt;cmath&gt;
+
+class vec3
+{
+public:
+	vec3() = default;
+	vec3(float);
+	vec3(float, float, float);
+	vec3(const vec3&amp;);
+	vec3 operator+(const vec3&amp;) const;
+	vec3&amp; operator+=(const vec3&amp;);
+	vec3 operator-(const vec3&amp;) const;
+	vec3&amp; operator-=(const vec3&amp;);
+	float ScalarMultiplication(const vec3&amp;);
+	vec3 operator*(float) const;
+	vec3&amp; operator*=(float);
+	vec3 operator/(float) const;
+	vec3&amp; operator/=(float);
+	vec3 VectorMultiplication(const vec3&amp;);
+	float Lenght();
+	vec3 Normalize();
+	const bool operator==(const vec3&amp;);
+	const bool operator!=(const vec3&amp;);
+<span style = "background-color:#dfd">	float x = 0, y = 0, z = 0;</span>
+};
+</pre>
+	</body>
+</html>

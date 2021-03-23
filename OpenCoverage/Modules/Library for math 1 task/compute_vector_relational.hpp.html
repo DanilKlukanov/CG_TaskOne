@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>compute_vector_relational.hpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+#pragma once
+
+//#include "compute_common.hpp"
+#include "setup.hpp"
+#include &lt;limits&gt;
+
+namespace glm{
+namespace detail
+{
+	template &lt;typename T, bool isFloat&gt;
+	struct compute_equal
+	{
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static bool call(T a, T b)
+<span style = "background-color:#dfd">		{
+			return a == b;
+		}</span>
+	};
+/*
+	template &lt;typename T&gt;
+	struct compute_equal&lt;T, true&gt;
+	{
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static bool call(T a, T b)
+		{
+			return detail::compute_abs&lt;T, std::numeric_limits&lt;T&gt;::is_signed&gt;::call(b - a) &lt;= static_cast&lt;T&gt;(0);
+			//return std::memcmp(&amp;a, &amp;b, sizeof(T)) == 0;
+		}
+	};
+*/
+}//namespace detail
+}//namespace glm</pre>
+	</body>
+</html>
