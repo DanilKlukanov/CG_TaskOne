@@ -2,6 +2,7 @@
 #include <cmath>
 #include "vec3.h"
 #include <vector>
+#include <array>
 
 class math3
 {
@@ -9,8 +10,8 @@ public:
 	math3();
 	math3(float);
 	math3(float, float, float,
-		float, float, float,
-		float, float, float);
+		  float, float, float,
+		  float, float, float);
 	math3(const vec3&, const vec3&, const vec3&);
 	math3(const math3&);
 	math3 operator+(const math3&) const;
@@ -36,6 +37,6 @@ public:
 	const bool operator==(const math3&);
 	const bool operator!=(const math3&);
 
-	std::vector<std::vector<float>> matrix;
+	std::array<std::array<float, 3>, 3> matrix;
 };
 

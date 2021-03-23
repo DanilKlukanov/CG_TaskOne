@@ -1755,31 +1755,6 @@ TEST(Math4, TransMatrix) {
 
 	math4 MatOne(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 	math4 res = MatOne.TransposedMatrix();
-
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			std::cout << MatOne.matrix[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-
-	std::cout << std::endl;
-
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			std::cout << result[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-
-	std::cout << std::endl;
-
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			std::cout << res.matrix[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
 	
 	EXPECT_EQ(result[0][0], res.matrix[0][0]);
 	EXPECT_EQ(result[0][1], res.matrix[0][1]);
@@ -1832,12 +1807,137 @@ TEST(Math4, ScaleMatrix) {
 	EXPECT_EQ(result[3][3], res.matrix[3][3]);
 }
 
+TEST(Math4, RotateMatrix) {
+	glm::mat4 MathOne = glm::mat4(1, 2, 0, 2, -5, -12, 7, 176, 0, 0, -1, -1, -1, 45, 212, 33);
+	glm::mat4 result = glm::rotate(MathOne, 3.14f, glm::vec3(1));
+
+	math4 MatOne(1, 2, 0, 2, -5, -12, 7, 176, 0, 0, -1, -1, -1, 45, 212, 33);
+	math4 res = MatOne.Rotate(3.14f, vec3(1));
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[0][2], res.matrix[0][2]);
+	EXPECT_EQ(result[0][3], res.matrix[0][3]);
+
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+	EXPECT_EQ(result[1][2], res.matrix[1][2]);
+	EXPECT_EQ(result[1][3], res.matrix[1][3]);
+
+	EXPECT_EQ(result[2][0], res.matrix[2][0]);
+	EXPECT_EQ(result[2][1], res.matrix[2][1]);
+	EXPECT_EQ(result[2][2], res.matrix[2][2]);
+	EXPECT_EQ(result[2][3], res.matrix[2][3]);
+
+	EXPECT_EQ(result[3][0], res.matrix[3][0]);
+	EXPECT_EQ(result[3][1], res.matrix[3][1]);
+	EXPECT_EQ(result[3][2], res.matrix[3][2]);
+	EXPECT_EQ(result[3][3], res.matrix[3][3]);
+}
+
 TEST(Math4, TranslateMatrix) {
 	glm::mat4 MathOne = glm::mat4(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 	glm::mat4 result = glm::translate(MathOne, glm::vec3(5.0f, -12.0f, 100.0f));
 
 	math4 MatOne(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 	math4 res = MatOne.Translate(vec3(5.0f, -12.0f, 100.0f));
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[0][2], res.matrix[0][2]);
+	EXPECT_EQ(result[0][3], res.matrix[0][3]);
+
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+	EXPECT_EQ(result[1][2], res.matrix[1][2]);
+	EXPECT_EQ(result[1][3], res.matrix[1][3]);
+
+	EXPECT_EQ(result[2][0], res.matrix[2][0]);
+	EXPECT_EQ(result[2][1], res.matrix[2][1]);
+	EXPECT_EQ(result[2][2], res.matrix[2][2]);
+	EXPECT_EQ(result[2][3], res.matrix[2][3]);
+
+	EXPECT_EQ(result[3][0], res.matrix[3][0]);
+	EXPECT_EQ(result[3][1], res.matrix[3][1]);
+	EXPECT_EQ(result[3][2], res.matrix[3][2]);
+	EXPECT_EQ(result[3][3], res.matrix[3][3]);
+}
+
+TEST(Math4, Ortho) {
+	glm::mat4 result = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+
+	math4 res;
+	res = res.Ortho(0.0f, 800.0f, 0.0f, 600.0f);
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[0][2], res.matrix[0][2]);
+	EXPECT_EQ(result[0][3], res.matrix[0][3]);
+
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+	EXPECT_EQ(result[1][2], res.matrix[1][2]);
+	EXPECT_EQ(result[1][3], res.matrix[1][3]);
+
+	EXPECT_EQ(result[2][0], res.matrix[2][0]);
+	EXPECT_EQ(result[2][1], res.matrix[2][1]);
+	EXPECT_EQ(result[2][2], res.matrix[2][2]);
+	EXPECT_EQ(result[2][3], res.matrix[2][3]);
+
+	EXPECT_EQ(result[3][0], res.matrix[3][0]);
+	EXPECT_EQ(result[3][1], res.matrix[3][1]);
+	EXPECT_EQ(result[3][2], res.matrix[3][2]);
+	EXPECT_EQ(result[3][3], res.matrix[3][3]);
+}
+
+TEST(Math4, LookAt) {
+	glm::mat4 result = glm::lookAt(glm::vec3(4.0f, 2.0f, 3.0f), glm::vec3(1.0f, 5.0f, 7.0f), glm::vec3(9.0f, 1.0f, 10.0f));
+
+	math4 res;
+	res = res.LookAt(vec3(4.0f, 2.0f, 3.0f), vec3(1.0f, 5.0f, 7.0f), vec3(9.0f, 1.0f, 10.0f));
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			std::cout << result[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			std::cout << res.matrix[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+
+	EXPECT_EQ(result[0][0], res.matrix[0][0]);
+	EXPECT_EQ(result[0][1], res.matrix[0][1]);
+	EXPECT_EQ(result[0][2], res.matrix[0][2]);
+	EXPECT_EQ(result[0][3], res.matrix[0][3]);
+
+	EXPECT_EQ(result[1][0], res.matrix[1][0]);
+	EXPECT_EQ(result[1][1], res.matrix[1][1]);
+	EXPECT_EQ(result[1][2], res.matrix[1][2]);
+	EXPECT_EQ(result[1][3], res.matrix[1][3]);
+
+	EXPECT_EQ(result[2][0], res.matrix[2][0]);
+	EXPECT_EQ(result[2][1], res.matrix[2][1]);
+	EXPECT_EQ(result[2][2], res.matrix[2][2]);
+	EXPECT_EQ(result[2][3], res.matrix[2][3]);
+
+	EXPECT_EQ(result[3][0], res.matrix[3][0]);
+	EXPECT_EQ(result[3][1], res.matrix[3][1]);
+	EXPECT_EQ(result[3][2], res.matrix[3][2]);
+	EXPECT_EQ(result[3][3], res.matrix[3][3]);
+}
+
+TEST(Math4, Perspective) {
+	glm::mat4 result = glm::perspective(3.14f / 2, 800.0f / 600.0f, 0.1f, 100.0f);
+
+	math4 res;
+	res = res.Perspective(3.14f / 2, 800.0f / 600.0f, 0.1f, 100.0f);
 
 	EXPECT_EQ(result[0][0], res.matrix[0][0]);
 	EXPECT_EQ(result[0][1], res.matrix[0][1]);

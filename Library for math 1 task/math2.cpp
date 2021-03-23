@@ -1,18 +1,9 @@
 #include "pch.h"
 #include "math2.h"
 
-math2::math2() {
-	for (int i = 0; i < 2; i++) {
-		matrix.push_back(std::vector<float>(2));
-	}
-}
+math2::math2() = default;
 
 math2::math2(float number) {
-	matrix.resize(2);
-	for (int i = 0; i < 2; i++) {
-		matrix[i].resize(2);
-	}
-
 	matrix[0][0] = number;
 	matrix[0][1] = 0;
 	matrix[1][0] = 0;
@@ -20,10 +11,6 @@ math2::math2(float number) {
 }
 
 math2::math2(float a, float b, float c, float d) {
-	matrix.resize(2);
-	for (int i = 0; i < 2; i++) {
-		matrix[i].resize(2);
-	}
 	matrix[0][0] = a;
 	matrix[0][1] = c;
 	matrix[1][0] = b;
@@ -31,11 +18,6 @@ math2::math2(float a, float b, float c, float d) {
 }
 
 math2::math2(const vec2& first, const vec2& second) {
-	matrix.resize(2);
-	for (int i = 0; i < 2; i++) {
-		matrix[i].resize(2);
-	}
-
 	matrix[0][0] = first.x;
 	matrix[0][1] = second.x;
 	matrix[1][0] = first.y;
@@ -43,11 +25,6 @@ math2::math2(const vec2& first, const vec2& second) {
 }
 
 math2::math2(const math2& other) {
-	matrix.resize(2);
-	for (int i = 0; i < 2; i++) {
-		matrix[i].resize(2);
-	}
-
 	matrix = other.matrix;
 }
 

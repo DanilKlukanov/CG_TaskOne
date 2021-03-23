@@ -71,7 +71,7 @@ vec3 vec3::Normalize() {
 }
 
 const bool vec3::operator==(const vec3& other) {
-	return (x == other.x && y == other.y, z == other.z);
+	return (x == other.x && y == other.y && z == other.z);
 }
 
 const bool vec3::operator!=(const vec3& other) {

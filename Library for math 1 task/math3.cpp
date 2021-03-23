@@ -1,17 +1,9 @@
 #include "pch.h"
 #include "math3.h"
 
-math3::math3() {
-	for (int i = 0; i < 3; i++) {
-		matrix.push_back(std::vector<float>(3));
-	}
-}
+math3::math3() = default;
 
 math3::math3(float number) {
-	matrix.resize(3);
-	for (int i = 0; i < 3; i++) {
-		matrix[i].resize(3);
-	}
 	matrix[0][0] = number;
 	matrix[0][1] = 0;
 	matrix[0][2] = 0;
@@ -27,10 +19,6 @@ math3::math3(float a, float b, float c,
 			 float d, float e, float f,
 			 float g, float h, float i) 
 {
-	matrix.resize(3);
-	for (int i = 0; i < 3; i++) {
-		matrix[i].resize(3);
-	}
 	matrix[0][0] = a;
 	matrix[0][1] = d;
 	matrix[0][2] = g;
@@ -43,10 +31,6 @@ math3::math3(float a, float b, float c,
 }
 
 math3::math3(const vec3& first, const vec3& second, const vec3& third) {
-	matrix.resize(3);
-	for (int i = 0; i < 3; i++) {
-		matrix[i].resize(3);
-	}
 	matrix[0][0] = first.x;
 	matrix[0][1] = second.x;
 	matrix[0][2] = third.x;

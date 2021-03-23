@@ -2,6 +2,9 @@
 #include <cmath>
 #include "vec4.h"
 #include "vec3.h"
+#include <vector>
+#include <array>
+
 class math4
 {
 public:
@@ -32,13 +35,16 @@ public:
 	math4 ReverseMatrix();
 	math4 TransposedMatrix();
 	math4 Translate(const vec3&);
-	math4 Rotate(const math4&);
+	math4 Rotate(float, vec3&);
 	math4 Scale(const vec3&);
 	vec4 GetRow(int);
 	vec4 GetColumn(int);
+	math4 LookAt(const vec3&, const vec3&, const vec3&);
+	math4 Perspective(float, float, float, float);
+	math4 Ortho(float, float, float, float);
 	const bool operator==(const math4&);
 	const bool operator!=(const math4&);
 
-	std::vector<std::vector<float>> matrix;
+	std::array<std::array<float, 4>, 4> matrix;
 };
 

@@ -2,6 +2,7 @@
 #include <cmath>
 #include "vec2.h"
 #include <vector>
+#include <array>
 
 class math2
 {
@@ -34,5 +35,5 @@ public:
 	const bool operator==(const math2&);
 	const bool operator!=(const math2&);
 
-	std::vector<std::vector<float>> matrix;
+	std::array<std::array<float, 2>, 2> matrix;
 };
